@@ -361,7 +361,7 @@ mkdir folder
 *création d'un umask 177 car sticky bit pour les autorisation d'écriture et de lecture*
 
 <code>
-umask 117
+umask 1 077
 pour voire les droit
 ll
 </code>
