@@ -3,7 +3,7 @@
 <h1>Exercice 1. Gestion des utilisateurs et des groupes</h1>
 
 <ol>
-<li><h2>Commencez par créer deux groupes groupe1 et groupe2<h2></li>
+<li><h3>Commencez par créer deux groupes groupe1 et groupe2<h3></li>
 
 *création d'utilisateur*
 
@@ -14,9 +14,9 @@
  >`sudo addgroup ics`
  >`sudo groupadd ics`
 
-<li><h2>Créez ensuite 4 utilisateurs u1, u2, u3, u4 avec la commande useradd, en demandant la création de
+<li><h3>Créez ensuite 4 utilisateurs u1, u2, u3, u4 avec la commande useradd, en demandant la création de
 leur dossier personnel et avec bash pour shell
-</h2></li>
+</h3></li>
 
 *création d'un utilisateur u1 avec son dossier personnel et Sélectionne le shell à utiliser pour exécuter les commandes du terminal*
 
@@ -26,16 +26,16 @@ leur dossier personnel et avec bash pour shell
 
  >`sudo useradd u1 -m --shell /bin/bash`
 
-<li><h2>Placez les utilisateurs dans les groupes :
+<li><h3>Placez les utilisateurs dans les groupes :
 - u1, u2, u4 dans groupe1
 - u2, u3, u4 dans groupe2
-</h2></li>
+</h3></li>
 
 *- Ajouter un utilisateur existant à un groupe (secondaire) existant*
 
 >`usermod -a -G groupe1 u1`
 
-<li><h2>Donnez deux moyens d’afficher les membres de groupe2</h2></li>
+<li><h3>Donnez deux moyens d’afficher les membres de groupe2</h3></li>
 
 *affiche grace au chemin et a la commande grep qui récupère la valeur "groupe"*
 
@@ -45,24 +45,24 @@ leur dossier personnel et avec bash pour shell
 
 >`members "groupe2"`
 
-<li><h2>Faites de groupe1 le groupe propriétaire de /home/u1 et /home/u2 et de groupe2 le groupe propriétaire
-de /home/u3 et /home/u4</h2></li>
+<li><h3>Faites de groupe1 le groupe propriétaire de /home/u1 et /home/u2 et de groupe2 le groupe propriétaire
+de /home/u3 et /home/u4</h3></li>
 
 *chown est la commande qui modifier  le propriétaire du fichier ici groupe1 deviens prop du fichier u2  *
 
 >`chown  :groupe1 /home/u2`
 
-<li><h2>Remplacez le groupe primaire des utilisateurs :
+<li><h3>Remplacez le groupe primaire des utilisateurs :
 - groupe1 pour u1 et u2
-- groupe2 pour u3 et u4</h2></li>
+- groupe2 pour u3 et u4</h3></li>
 
 *usermod permet modifier le groupe primaire d’un utilisateur*
 
 >`sudo usermod -g groupe1 u1,u2`
 
-<li><h2>Créez deux répertoires /home/groupe1 et /home/groupe2 pour le contenu commun aux groupes, et
+<li><h3>Créez deux répertoires /home/groupe1 et /home/groupe2 pour le contenu commun aux groupes, et
 mettez en place les permissions permettant aux membres de chaque groupe d’écrire dans le dossier
-associé</h2></li>
+associé</h3></li>
 
 *création d'un fichier groupe1*
 
@@ -73,16 +73,16 @@ les fichiers 1 grace au valeur numérique 770 on donneras les droits sur se doss
 
 >`chmod 770 groupe1`
 
-<li><h2>Comment faire pour que, dans ces dossiers, seul le propriétaire d’un fichier ait le droit de renommer
+<li><h3>Comment faire pour que, dans ces dossiers, seul le propriétaire d’un fichier ait le droit de renommer
 ou supprimer ce fichier ?
-</h2></li>
+</h3></li>
 
 *grace a sticky bit  que seul les propriétaire de se fichiers peuvent le modifier ect ici le propriétaire de se fichier est groupe1 donc tout les nembres du groupe 1 peuvent le modifier*
 
 >`chmod +t groupe1`
 
 
-<li><h2>Pouvez-vous vous connecter en tant que u1 ? Pourquoi ?</h2></li>
+<li><h3>Pouvez-vous vous connecter en tant que u1 ? Pourquoi ?</h3></li>
 
 *avec su on prend l’identité de quelqu’un d’autre, pas avec sudo*
 
@@ -90,8 +90,8 @@ ou supprimer ce fichier ?
 
 *non car nous n'avons pas configurer de mot de passe*
 
-<li><h2>Activez le compte de l’utilisateur u1 et vérifiez que vous pouvez désormais vous connecter avec son
-compte</h2></li>
+<li><h3>Activez le compte de l’utilisateur u1 et vérifiez que vous pouvez désormais vous connecter avec son
+compte</h3></li>
 
 *Nous allons configurer un mpd au compte*
 
@@ -101,32 +101,32 @@ compte</h2></li>
 
 >`su u1`
 
-<li><h2>Quels sont l’uid et le gid de u1 ?
-</h2></li>
+<li><h3>Quels sont l’uid et le gid de u1 ?
+</h3></li>
 
 *grace id nomUtilisateurs nous allons récupérer sont id*
 
 >`id u2`
 
-<li><h2>Quel utilisateur a pour uid 1003 ?</h2></li>
+<li><h3>Quel utilisateur a pour uid 1003 ?</h3></li>
 
 *on utilise la commande getent pour rechercher dans un groupe la personne qui a pour uid=1003*
 
 >`getent group groupe1 1004`
 
-<li><h2>Quel est l’id du groupe groupe1 ?</h2></li>
+<li><h3>Quel est l’id du groupe groupe1 ?</h3></li>
 
 *soit on utilise getent pour récupérer l'id du groupe soit on se déplace dans le dossier groupe pour regarder sont id*
 
 >`getent group groupe1`
 
-<li><h2>Quel groupe a pour guid 1002 ?</h2></li>
+<li><h3>Quel groupe a pour guid 1002 ?</h3></li>
 
 *grace a getent il suffit de renseigner l id du group pour qu'il nous le trouve*
 
 >`getent group 1003`
 
-<li><h2>Retirez l’utilisateur u3 du groupe groupe2. Que se passe-t-il ? Expliquez.</h2></li>
+<li><h3>Retirez l’utilisateur u3 du groupe groupe2. Que se passe-t-il ? Expliquez.</h3></li>
 
 *la commande gpasswd est utilisée pour  administrer les groups donc remove ect -d = delete*
 
@@ -134,13 +134,13 @@ compte</h2></li>
 
 *on ne peut pas enlever sont utilisateur car c'est sont unique groupe*
 
-<li><h2>Modifiez le compte de u4 de sorte que :
+<li><h3>Modifiez le compte de u4 de sorte que :
 — il expire au 1
 er juin 2020
 — il faut changer de mot de passe avant 90 jours
 — il faut attendre 5 jours pour modifier un mot de passe
 — l’utilisateur est averti 14 jours avant l’expiration de son mot de passe
-— le compte sera bloqué 30 jours après expiration du mot de pass</h2></li>
+— le compte sera bloqué 30 jours après expiration du mot de pass</h3></li>
 
 *--expiredate = set date*
 
@@ -157,7 +157,7 @@ sudo chage -W 14 u4
 sudo chage -I 30 u4
 </code>
 
-<li><h2>Quel est l’interpréteur de commandes (Shell) de l’utilisateur root ?</h2></li>
+<li><h3>Quel est l’interpréteur de commandes (Shell) de l’utilisateur root ?</h3></li>
 
 <code>
 grep root /etc/passwd
@@ -171,7 +171,7 @@ sudo echo $SHELL
 C'est /bin/bash
 </code>
 
-<li><h2>à quoi correspond l’utilisateur nobody ?</h2></li>
+<li><h3>à quoi correspond l’utilisateur nobody ?</h3></li>
 
 <code>
 grep nobody /etc/passwd
@@ -184,9 +184,9 @@ nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
 <h1>Exercice 2. Gestion des permissions</h1>
 
 <ol>
-<li><h2>Dans votre $HOME, créez un dossier test, et dans ce dossier un fichier fichier contenant quelques
+<li><h3>Dans votre $HOME, créez un dossier test, et dans ce dossier un fichier fichier contenant quelques
 lignes de texte. Quels sont les droits sur test et fichier ?
-</h2></li>
+</h3></li>
 
 *création d'un fichier nommé fichier et d'un dossier test et *
 
@@ -203,7 +203,7 @@ ls -l test/fichier
 </code>
 
 *-rw--r--r 1*
-<li><h2>Retirez tous les droits sur ce fichier (même pour vous), puis essayez de le modifier et de l’afficher en tant que root. Conclusion ?</li></h2>
+<li><h3>Retirez tous les droits sur ce fichier (même pour vous), puis essayez de le modifier et de l’afficher en tant que root. Conclusion ?</li></h3>
 
 *retire tout les droit du fichier grace a chmod (rwx droit écriture ect)(ugo user group ect)*
 <code>
@@ -226,7 +226,7 @@ cat test/fichier
 
 *donc la on arrive a le lire*
 
-<li><h2>Redonnez vous les droits en écriture et exécution sur fichier puis exécutez la commande echo "echo Hello" > fichier. On a vu lors des TP précédents que cette commande remplace le contenu d’un fichier s’il existe déjà. Que peut-on dire au sujet des droits ?</h2></li>
+<li><h3>Redonnez vous les droits en écriture et exécution sur fichier puis exécutez la commande echo "echo Hello" > fichier. On a vu lors des TP précédents que cette commande remplace le contenu d’un fichier s’il existe déjà. Que peut-on dire au sujet des droits ?</h3></li>
 
 *on est redonnez les droit d'écriture sur notre fichier*
 
@@ -247,7 +247,7 @@ sudo su
 cat test/fichier
 </code>
 
-<li><h2>Essayez d’exécuter le fichier. Est-ce que cela fonctionne ? Et avec sudo ? Expliquez</li></h2> 
+<li><h3>Essayez d’exécuter le fichier. Est-ce que cela fonctionne ? Et avec sudo ? Expliquez</li></h3> 
 
 *nous n'avons pas les droits de lecture sur le fichier donc on ne peut pas l'éxécuter même avec sudo*
 
@@ -255,9 +255,9 @@ cat test/fichier
 ./test/fichier
 </code>
 
-<li><h2>Placez-vous dans le répertoire test, et retirez-vous le droit en lecture pour ce répertoire. Listez le
+<li><h3>Placez-vous dans le répertoire test, et retirez-vous le droit en lecture pour ce répertoire. Listez le
 contenu du répertoire, puis exécutez ou affichez le contenu du fichier fichier. Qu’en déduisez-vous ?
-Rétablissez le droit en lecture sur test</h2</li>
+Rétablissez le droit en lecture sur test</h3</li>
 
 *on enlève les permissions du répertoir test *
 <code>
@@ -269,7 +269,7 @@ sudo chmod u-r ../test
 </code>
 *on ne peut pas l'éxecuter car on ne peut pas lire les fichiers dans ce répertoire donc on ne peut pas les éxécuter (on ne peut même pas faire de ls car on na pas le droit de lister les fichiers)*
 
-<li><h2>Créez dans test un fichier nouveau ainsi qu’un répertoire sstest. Retirez au fichier nouveau et au répertoire test le droit en écriture. Tentez de modifier le fichier nouveau. Rétablissez ensuite le droit en écriture au répertoire test. Tentez de modifier le fichier nouveau, puis de le supprimer. Que pouvezvous déduire de toutes ces manipulations ?</h2></li>
+<li><h3>Créez dans test un fichier nouveau ainsi qu’un répertoire sstest. Retirez au fichier nouveau et au répertoire test le droit en écriture. Tentez de modifier le fichier nouveau. Rétablissez ensuite le droit en écriture au répertoire test. Tentez de modifier le fichier nouveau, puis de le supprimer. Que pouvezvous déduire de toutes ces manipulations ?</h3></li>
 
 *création du fichier nouveau et un répertoire*
 
@@ -294,7 +294,7 @@ nano nouveau
 permission denied
 </code>
 
-<li><h2>Positionnez vous dans votre répertoire personnel, puis retirez le droit en exécution du répertoire test. Tentez de créer, supprimer, ou modifier un fichier dans le répertoire test, de vous y déplacer, d’en lister le contenu, etc…Qu’en déduisez vous quant au sens du droit en exécution pour les répertoires ?</h2</li>
+<li><h3>Positionnez vous dans votre répertoire personnel, puis retirez le droit en exécution du répertoire test. Tentez de créer, supprimer, ou modifier un fichier dans le répertoire test, de vous y déplacer, d’en lister le contenu, etc…Qu’en déduisez vous quant au sens du droit en exécution pour les répertoires ?</h3</li>
 
 *on se déplace dans notre répétoire personnelle et on lui retire tout les droits*
 
@@ -312,11 +312,11 @@ ls test
 
 *nous n'avons aucun droit sur le répertoir donc aucune commande marche*
 
-<li><h2>Rétablissez le droit en exécution du répertoire test. Positionnez vous dans ce répertoire et retirez lui
+<li><h3>Rétablissez le droit en exécution du répertoire test. Positionnez vous dans ce répertoire et retirez lui
 à nouveau le droit d’exécution. Essayez de créer, supprimer et modifier un fichier dans le répertoire
 test, de vous déplacer dans ssrep, de lister son contenu. Qu’en concluez-vous quant à l’influence des
 droits que l’on possède sur le répertoire courant ? Peut-on retourner dans le répertoire parent avec ”cd
-..” ? Pouvez-vous donner une explication ?</li></h2>
+..” ? Pouvez-vous donner une explication ?</li></h3>
 
 *on allons rétablir les droit d'éxécution de notre répertoire*
 
@@ -335,8 +335,8 @@ ls
 *on remarque que notre répertoire courant est trés important  car les dossiers fils hérite de leur droits*
 
 
-<li><h2>Rétablissez le droit en exécution du répertoire test. Attribuez au fichier fichier les droits suffisants
-pour qu’une autre personne de votre groupe puisse y accéder en lecture, mais pas en écriture.</li></h2>
+<li><h3>Rétablissez le droit en exécution du répertoire test. Attribuez au fichier fichier les droits suffisants
+pour qu’une autre personne de votre groupe puisse y accéder en lecture, mais pas en écriture.</li></h3>
 
 *on redonne les droits au fichier*
 
@@ -347,9 +347,9 @@ ll
 
 *on remarque que le total des droits de se fichier est égal a 16*
 
-<li><h2>Définissez un umask très restrictif qui interdit à quiconque à part vous l’accès en lecture ou en écriture,
+<li><h3>Définissez un umask très restrictif qui interdit à quiconque à part vous l’accès en lecture ou en écriture,
 ainsi que la traversée de vos répertoires. Testez sur un nouveau fichier et un nouveau répertoire.
-</h2></li>
+</h3></li>
 
 *on va créer un repartoir et un nouveau fichier*
 
@@ -366,7 +366,7 @@ pour voire les droit
 ll
 </code>
 
-<li><h2>Définissez un umask très permissif qui autorise tout le monde à lire vos fichiers et traverser vos répertoires, mais n’autorise que vous à écrire. Testez sur un nouveau fichier et un nouveau répertoire.</h2><li>
+<li><h3>Définissez un umask très permissif qui autorise tout le monde à lire vos fichiers et traverser vos répertoires, mais n’autorise que vous à écrire. Testez sur un nouveau fichier et un nouveau répertoire.</h3><li>
 
 *definition d'un nouveau umask*
 <code>
@@ -376,7 +376,7 @@ ll
 </code>
 
 
-<li><h2>Définissez un umask équilibré qui vous autorise un accès complet et autorise un accès en lecture aux membres de votre groupe. Testez sur un nouveau fichier et un nouveau répertoire.</h2</li>
+<li><h3>Définissez un umask équilibré qui vous autorise un accès complet et autorise un accès en lecture aux membres de votre groupe. Testez sur un nouveau fichier et un nouveau répertoire.</h3></li>
 
 *definition d'un nouveau umask*
 
