@@ -257,7 +257,7 @@ cat test/fichier
 
 <li><h3>Placez-vous dans le répertoire test, et retirez-vous le droit en lecture pour ce répertoire. Listez le
 contenu du répertoire, puis exécutez ou affichez le contenu du fichier fichier. Qu’en déduisez-vous ?
-Rétablissez le droit en lecture sur test</h3</li>
+Rétablissez le droit en lecture sur test</h3></li>
 
 *on enlève les permissions du répertoir test *
 <code>
@@ -294,7 +294,7 @@ nano nouveau
 permission denied
 </code>
 
-<li><h3>Positionnez vous dans votre répertoire personnel, puis retirez le droit en exécution du répertoire test. Tentez de créer, supprimer, ou modifier un fichier dans le répertoire test, de vous y déplacer, d’en lister le contenu, etc…Qu’en déduisez vous quant au sens du droit en exécution pour les répertoires ?</h3</li>
+<li><h3>Positionnez vous dans votre répertoire personnel, puis retirez le droit en exécution du répertoire test. Tentez de créer, supprimer, ou modifier un fichier dans le répertoire test, de vous y déplacer, d’en lister le contenu, etc…Qu’en déduisez vous quant au sens du droit en exécution pour les répertoires ?</h3></li>
 
 *on se déplace dans notre répétoire personnelle et on lui retire tout les droits*
 
@@ -316,7 +316,7 @@ ls test
 à nouveau le droit d’exécution. Essayez de créer, supprimer et modifier un fichier dans le répertoire
 test, de vous déplacer dans ssrep, de lister son contenu. Qu’en concluez-vous quant à l’influence des
 droits que l’on possède sur le répertoire courant ? Peut-on retourner dans le répertoire parent avec ”cd
-..” ? Pouvez-vous donner une explication ?</li></h3>
+..” ? Pouvez-vous donner une explication ?</h3></li>
 
 *on allons rétablir les droit d'éxécution de notre répertoire*
 
@@ -336,7 +336,7 @@ ls
 
 
 <li><h3>Rétablissez le droit en exécution du répertoire test. Attribuez au fichier fichier les droits suffisants
-pour qu’une autre personne de votre groupe puisse y accéder en lecture, mais pas en écriture.</li></h3>
+pour qu’une autre personne de votre groupe puisse y accéder en lecture, mais pas en écriture.</h3></li>
 
 *on redonne les droits au fichier*
 
