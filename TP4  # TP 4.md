@@ -159,4 +159,231 @@ sudo chage -I 30 u4
 
 <li><h2>Quel est l’interpréteur de commandes (Shell) de l’utilisateur root ?</h2></li>
 
+<code>
+grep root /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+</code>
+
+*Ou bien*
+
+<code>
+sudo echo $SHELL
+C'est /bin/bash
+</code>
+
+<li><h2>à quoi correspond l’utilisateur nobody ?</h2></li>
+
+<code>
+grep nobody /etc/passwd
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+</code>
+
+*Nobody est un utilisateur qui n'a aucun droit sous linux, les droits minimun. Il a donc que les droits défini dans other des fichiers.*
+</ol>
+
+<h1>Exercice 2. Gestion des permissions</h1>
+
+<ol>
+<li><h2>Dans votre $HOME, créez un dossier test, et dans ce dossier un fichier fichier contenant quelques
+lignes de texte. Quels sont les droits sur test et fichier ?
+</h2></li>
+
+*création d'un fichier nommé fichier et d'un dossier test et *
+
+<code>
+sudo mkdir test
+sudo touch fichier
+</code>
+
+*affichage des droits du dossier*
+
+<code>
+ls -l test
+ls -l test/fichier
+</code>
+
+*-rw--r--r 1*
+<li><h2>Retirez tous les droits sur ce fichier (même pour vous), puis essayez de le modifier et de l’afficher en tant que root. Conclusion ?</li></h2>
+
+*retire tout les droit du fichier grace a chmod (rwx droit écriture ect)(ugo user group ect)*
+<code>
+chmod 000 test/fichier
+ou
+chmod ugo-rwx test/fichier
+</code>
+
+*test du droit de regard avec mon utilisateur donc je n'est plus les droit*
+<code>
+cat test/fichier
+</code>
+
+*test en mode root*
+
+<code>
+sudo su
+cat test/fichier
+</code>
+
+*donc la on arrive a le lire*
+
+<li><h2>Redonnez vous les droits en écriture et exécution sur fichier puis exécutez la commande echo "echo Hello" > fichier. On a vu lors des TP précédents que cette commande remplace le contenu d’un fichier s’il existe déjà. Que peut-on dire au sujet des droits ?</h2></li>
+
+*on est redonnez les droit d'écriture sur notre fichier*
+
+<code>
+sudo chmod 300 test/fichier
+</code>
+
+*maintenant on va écrire dans notre fichier*
+
+<code>
+echo "droit ecriture" > test/fichier
+</code>
+
+*maintenant on va afficher notre texte mais comme nous n'avons pas les droit de regard nous allons le faire en mode root*
+
+<code>
+sudo su
+cat test/fichier
+</code>
+
+<li><h2>Essayez d’exécuter le fichier. Est-ce que cela fonctionne ? Et avec sudo ? Expliquez</li></h2> 
+
+*nous n'avons pas les droits de lecture sur le fichier donc on ne peut pas l'éxécuter même avec sudo*
+
+<code>
+./test/fichier
+</code>
+
+<li><h2>Placez-vous dans le répertoire test, et retirez-vous le droit en lecture pour ce répertoire. Listez le
+contenu du répertoire, puis exécutez ou affichez le contenu du fichier fichier. Qu’en déduisez-vous ?
+Rétablissez le droit en lecture sur test</h2</li>
+
+*on enlève les permissions du répertoir test *
+<code>
+sudo chmod u-r ../test
+</code>
+*puis on execute le fichier*
+<code>
+./fichier
+</code>
+*on ne peut pas l'éxecuter car on ne peut pas lire les fichiers dans ce répertoire donc on ne peut pas les éxécuter (on ne peut même pas faire de ls car on na pas le droit de lister les fichiers)*
+
+<li><h2>Créez dans test un fichier nouveau ainsi qu’un répertoire sstest. Retirez au fichier nouveau et au répertoire test le droit en écriture. Tentez de modifier le fichier nouveau. Rétablissez ensuite le droit en écriture au répertoire test. Tentez de modifier le fichier nouveau, puis de le supprimer. Que pouvezvous déduire de toutes ces manipulations ?</h2></li>
+
+*création du fichier nouveau et un répertoire*
+
+<code>
+cd /test
+touch nouveau
+mkdir sstest
+</code>
+
+*on retire les droits au fichier nouveau et au repertoire*
+
+<code>
+chmod u-w nouveau
+chmod u-w  ../test
+</code>
+
+*on ne peut pas écrire dans notre fichier avec nano fichier  même si on re donne les droits d'écriture au répertoire, le répertoire nes't pas prioritaire*
+
+<code>
+chmod u+w ../test
+nano nouveau 
+permission denied
+</code>
+
+<li><h2>Positionnez vous dans votre répertoire personnel, puis retirez le droit en exécution du répertoire test. Tentez de créer, supprimer, ou modifier un fichier dans le répertoire test, de vous y déplacer, d’en lister le contenu, etc…Qu’en déduisez vous quant au sens du droit en exécution pour les répertoires ?</h2</li>
+
+*on se déplace dans notre répétoire personnelle et on lui retire tout les droits*
+
+<code>
+cd test
+chmod u-x ../test
+</code>
+
+*nous allons tester les permissions*
+
+<code>
+cd test
+ls test
+</code>
+
+*nous n'avons aucun droit sur le répertoir donc aucune commande marche*
+
+<li><h2>Rétablissez le droit en exécution du répertoire test. Positionnez vous dans ce répertoire et retirez lui
+à nouveau le droit d’exécution. Essayez de créer, supprimer et modifier un fichier dans le répertoire
+test, de vous déplacer dans ssrep, de lister son contenu. Qu’en concluez-vous quant à l’influence des
+droits que l’on possède sur le répertoire courant ? Peut-on retourner dans le répertoire parent avec ”cd
+..” ? Pouvez-vous donner une explication ?</li></h2>
+
+*on allons rétablir les droit d'éxécution de notre répertoire*
+
+<code>
+cd test/
+chmod u-x ../test
+</code>
+
+*nous allons tester les permissions*
+
+<code>
+cd sstest
+ls
+</code>
+
+*on remarque que notre répertoire courant est trés important  car les dossiers fils hérite de leur droits*
+
+
+<li><h2>Rétablissez le droit en exécution du répertoire test. Attribuez au fichier fichier les droits suffisants
+pour qu’une autre personne de votre groupe puisse y accéder en lecture, mais pas en écriture.</li></h2>
+
+*on redonne les droits au fichier*
+
+<code>
+chmod 650 fichier
+ll
+</code>
+
+*on remarque que le total des droits de se fichier est égal a 16*
+
+<li><h2>Définissez un umask très restrictif qui interdit à quiconque à part vous l’accès en lecture ou en écriture,
+ainsi que la traversée de vos répertoires. Testez sur un nouveau fichier et un nouveau répertoire.
+</h2></li>
+
+*on va créer un repartoir et un nouveau fichier*
+
+<code>
+touch fichier
+mkdir folder
+</code>
+
+*création d'un umask 177 car sticky bit pour les autorisation d'écriture et de lecture*
+
+<code>
+umask 117
+pour voire les droit
+ll
+</code>
+
+<li><h2>Définissez un umask très permissif qui autorise tout le monde à lire vos fichiers et traverser vos répertoires, mais n’autorise que vous à écrire. Testez sur un nouveau fichier et un nouveau répertoire.</h2><li>
+
+*definition d'un nouveau umask*
+<code>
+umask 011
+affiche les droits des ficher et dossier courant :
+ll
+</code>
+
+
+<li><h2>Définissez un umask équilibré qui vous autorise un accès complet et autorise un accès en lecture aux membres de votre groupe. Testez sur un nouveau fichier et un nouveau répertoire.</h2</li>
+
+*definition d'un nouveau umask*
+
+<code>
+umask 037
+affiche les droits des ficher et dossier courant:
+ll
+</code>
+
 </ol>
